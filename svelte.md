@@ -22,7 +22,8 @@ It's used for dynamic calculations, where you want these calculations to be exec
 ```javascript
 $: uppercaseName = name.toUpperCase()
 $: console.log(name)
-$: if (name=="Kenneth") {age=0}```  
+$: if (name=="Kenneth") {age=0}
+```  
 
 ### Components & Communication via Props  
 
@@ -34,14 +35,16 @@ To allow for a variable of a component to be set by a parent component, inside t
   export let userJobTitle
   export let userDescription
   export let userImage
-</script>```  
+</script>
+```  
 
 Importing the child component in the parent component works as such:  
 
 ```html
 <script>
   import ContactCard from './ContactCard.svelte'
-</script>```  
+</script>
+```  
 
 In the parent component, the child component together with its props is used like this:  
 
@@ -52,14 +55,16 @@ In the parent component, the child component together with its props is used lik
              userDescription={description}
              {userImage} // if the prop name and the variable name in the parent component have the same name, you can use this abbreviated syntax
              />
-             ```  
+             
+```  
 
 ### Two-way binding shortcut  
 
 Instead of having to write a typical input field event listener function with cumbersome markup line like this:  
 
 ```javascript
-<input type="text" value={name} on:input={nameInput}/>```  
+<input type="text" value={name} on:input={nameInput}/>
+```  
 
 And the "nameInput" function like this:  
 
@@ -67,31 +72,34 @@ And the "nameInput" function like this:
 function nameInput(e) {
   const enteredValue = e.target.value
   name = enteredValue
-}```  
+}
+```  
 
 It's possible in Svelte to use "bind:" syntax to create a bi-directional info flow in a much more concise way, without needing a separate event listener function:  
 
 ```html
-<input type="text" bind:value={name}/>```  
+<input type="text" bind:value={name}/>
+```  
 
 ### Dynamic CSS classes  
 
 Add a conditional css class based on whether userImage contains an address or not. If not, the "thumb-placeholder" is displayed instead.  
 
 ```html
-<div class="thumb" class:thumb-placeholder={!userImage}>```  
+<div class="thumb" class:thumb-placeholder={!userImage}>
+```  
 
 ### Assignment  
 
 Tasks  
 
-Add an input field that allows users to enter a course goal.  
+ - Add an input field that allows users to enter a course goal.  
 
-Output the user input in a h1 tag.  
+ - Output the user input in a h1 tag.  
 
-Color the output red (e.g. by adding a class) if it contains at least one exclamation mark.  
+ - Color the output red (e.g. by adding a class) if it contains at least one exclamation mark.  
 
-Put the h1 tag + output into a separate component to which you pass the user input.  
+ - Put the h1 tag + output into a separate component to which you pass the user input.  
 
 ## Section 3: Working with Conditionals & Loops  
 
@@ -99,13 +107,14 @@ Put the h1 tag + output into a separate component to which you pass the user inp
 
 You can create conditional rendering in the html code by using this syntax:  
 
-```jsx
+```html
 {if formState=="invalid"}
 	<p>Invalid input</p>
 {:else if formState=='none'}
 	<p>No contacts recorded, start adding contacts</p>
 {:else}
-	<p>Please start adding contacts!</p>```  
+	<p>Please start adding contacts!</p>
+```  
 
 ### Outputting lists with "each"  
 
@@ -121,7 +130,8 @@ Similar to the if, else, else-if conditional html rendering, it's possible to it
   userImage={contact.image} />
 {:else}
   <p>Please start adding contacts</p>
-{/each}```  
+{/each}
+```  
 
 ### Lists & keys  
 
@@ -129,21 +139,21 @@ To improve performance when handling lists and removing elements, it's best to u
 
 ### Assignment 2  
 
-Add a password input field and save the user input in a variable.  
+- Add a password input field and save the user input in a variable.  
 
-Output "too short" if the password is shorter than 5 characters and "too long" if it's longer than 10.  
+- Output "too short" if the password is shorter than 5 characters and "too long" if it's longer than 10.  
 
-Output the password in a paragraph tag if it's between these boundaries.  
+- Output the password in a paragraph tag if it's between these boundaries.  
 
-Add a button and let the user add the passwords to an array.  
+- Add a button and let the user add the passwords to an array.  
 
-Output the array values (=passwords) in an unordered list (ul tag).  
+- Output the array values (=passwords) in an unordered list (ul tag).  
 
-Bonus: if a password is clicked, remove it from the list.  
+- Bonus: if a password is clicked, remove it from the list.  
 
 Code:  
 
-```html
+```javascript
 <script>
   let password = ''
   let passwordList = []
@@ -157,11 +167,6 @@ Code:
   }
 
   function deletePassword(id) {
-    // passwordList.forEach((el, index) => {
-    //   if (el.id == id) {
-    //     passwordList.splice(index, 1)
-    //   }
-    // })
     passwordList = passwordList.filter(passObj => passObj.id != id)
   }
 
@@ -184,7 +189,8 @@ Code:
     <li on:click={()=>{deletePassword(psw.id)}}>{psw.password}</li>
     {/each}
   </ul>
-</div>```  
+</div>
+```  
 
 ## Section 4: A closer look at Reactivity  
 
@@ -193,21 +199,23 @@ Code:
 Possible to add a very short and convenient event modifier syntax, like this:  
 
 ```html
-<button on:click|preventDefault={savePassword}>Submit password</button>```  
+<button on:click|preventDefault={savePassword}>Submit password</button>
+```  
 
 This on:click|preventDefault would prevent an automatic page reloading after clicking a button inside a form, for example. Normally this preventDefault would have to be performed in a separate manual function in the code:  
 
 ```javascript
 function savePassword(e) {
   e.preventDefault()
-}```  
+}
+```  
 
 Or, for example, can use _once_ modifier to make the button clickable only once:  
 
 ```html
-<button on:click|once={savePassword}>Submit password</button>```  
+<button on:click|once={savePassword}>Submit password</button>
+```  
 
-## Section 5: Course Project - first steps  
 
 ## Section 6: Diving deeper into Components  
 
@@ -220,12 +228,14 @@ Instead of the on:click being handled in the Product.svelte component, it gets f
 In Product.svelte  
 
 ```html
-<button on:click > Add to Cart </button>```  
+<button on:click > Add to Cart </button>
+```  
 
 In the App.svelte  
 
 ```javascript
-<Product on:click={() => alert('Clicked')}```  
+<Product on:click={() => alert('Clicked')}
+```  
 
 However, if the _on:click_ in the Product.svelte is omitted, then the even will not be forwarded.  
 
@@ -239,7 +249,8 @@ Instead, it's possible to create custom events by leveraging the _createEventDis
 <script>
   import {createEventDispatcher} from 'svelte'
   const dispatch = createEventDispatcher()
-</script>```  
+</script>
+```  
 
 _dispatch_ takes in two arguments: 1) the custom function name, and 2) any data to be passed onto the function.<br/><br/>_dispatch_ and its custom function can be called both inline, as well as separately in the <script> section.  
 
@@ -248,7 +259,8 @@ In the Product.svelte
 Inline dispatch:  
 
 ```javascript
-<button on:click={() => dispatch('delete', 'p1')}> Delete </button>```  
+<button on:click={() => dispatch('delete', 'p1')}> Delete </button>
+```  
 
 function dispatch inside <script>:  
 
@@ -259,14 +271,16 @@ function dispatch inside <script>:
 }
 </script>
 
-<button on:click={addToCart} > Add to Cart </button>```  
+<button on:click={addToCart} > Add to Cart </button>
+```  
 
 In the App.svelte  
 
 ```javascript
 <Product
 	on:add-to-cart={() => alert('Added to cart!')}
-    on:delete={() => alert('Deleted item!')}```  
+    on:delete={() => alert('Deleted item!')}
+    ```  
 
 ### How to Extract Event Data  
 
@@ -279,7 +293,8 @@ In App.svelte you can you the _each_ syntax and display all of the products item
     on:add-to-cart={addToCart}
     on:delete={deleteProduct}
     />
-{/each}```  
+{/each}
+```  
 
 ### Working with Slots  
 
@@ -291,7 +306,8 @@ This will not work (in App.svelte):
 <Modal>
   <h1> Hello </h1>
   <h2> Again hello! </h2>
-</Modal>```  
+</Modal>
+```  
 
 This will work-ish, but will be suboptimal (in Modal.svelte):  
 
@@ -299,14 +315,16 @@ This will work-ish, but will be suboptimal (in Modal.svelte):
 <div class='modal'>
 	<h1> {h1Text} </h1>
 	<h2> {h2Text} </h2>
-</div>```  
+</div>
+```  
 
 Using "slots" it's possible to solve this problem. In Modal.svelte:  
 
 ```html
 <div class='modal'>
   <slot />
-</div>```  
+</div>
+```  
 
 ### Named & Default Slots  
 
@@ -331,7 +349,8 @@ In Modal.svelte:
             <button on:click={() => dispatch('close')}>Close</button>
         </slot>
     </footer>
-</div>```  
+</div>
+```  
 
 In App.svelte:  
 
@@ -344,7 +363,8 @@ In App.svelte:
     <h1 slot='header'>Hello!</h1>
     <p>This works!</p>
     <button on:click={() => showModal=false} slot='footer' disabled={!closeable}>Submit</button>
-</Modal> ```  
+</Modal> 
+```  
 
 ### The Component Lifecycle - Theory  
 
@@ -386,7 +406,8 @@ In Modal.svelte:
 
     console.log('Script executed');
 
-</script>```  
+</script>
+```  
 
 Another thing that's possible, though rarely used, is the tick() function, which executes code after a microtask has been executed. An example of the use of tick() can be if, after creating code that allows for a text area text to be selected and, after pressing Tab button, the selected text gets converted to uppercase. But in order to maintain the selection after having clicked and converted the text, it's only possible by using the tick() function.  
 
@@ -419,7 +440,8 @@ In App.svelte
     }
 </script>
 
-<textarea rows='5' value={text} on:keydown={transform}></textarea>```  
+<textarea rows='5' value={text} on:keydown={transform}></textarea>
+```  
 
 ## Section 7: Course Project - Components Deep Dive  
 
@@ -428,8 +450,6 @@ Continue working on the MeetUs project. Implementing learnings from the previous
 ## Section 8: Working with Bindings & Forms  
 
 Two-way bindings for dynamic types is not possible.  
-
-## Section 9: Course Project - Form Validation  
 
 ## Section 10: Managing State & Data with Stores  
 
@@ -455,7 +475,8 @@ const cart = writable([
       }
 ])
 
-export default cart```  
+export default cart
+```  
 
 To subscribe to a store from a component (in Cart.svelte):  
 
@@ -465,7 +486,8 @@ import cartItems from './cart-store'
 cartItems.subscribe(its => {
     items = its
     console.log(items);
-  })```  
+  })
+  ```  
 
 ### Updating Store Data  
 
@@ -483,7 +505,8 @@ function addToCart() {
         price
       }]
     })
-  }```  
+  }
+  ```  
 
 ### Managing Autosubscription  
 
@@ -504,7 +527,8 @@ let items
     if (unsubscribe) {
       unsubscribe()
     }
-  })```  
+  })
+  ```  
 
 How it is in Svelte:  
 
@@ -521,7 +545,8 @@ import cartItems from './cart-store'
       <p>No items in cart yet!</p>
     {/each}
   </ul>
-</section>```  
+</section>
+```  
 
 Where _$cartItems_ is a reference to the imported object _cartItems_ from the _cart-store.js_ file and is used directly inside markup.  
 
@@ -542,7 +567,8 @@ function displayDescription() {
       description = prods.find(p => p.id === id).description
     })
     unsubscribe()
-  }```  
+  }
+  ```  
 
 ### Understanding Readable Stores  
 
@@ -564,7 +590,8 @@ export const timer = readable(0, (set) => {
     return () => {
         clearInterval(interval)
     }
-})```  
+})
+```  
 
 ### Unlimited power with Custom Stores  
 
@@ -605,7 +632,8 @@ import { writable } from "svelte/store";
     }
   } 
 
-export default customCart```  
+export default customCart
+```  
 
 Then from the components the methods are called like this:  
 
@@ -618,7 +646,8 @@ function addToCart() {
       title: title,
       price: price
     })
-  }```  
+  }
+  ```  
 
 ### Derived Store & Store Bindings  
 
@@ -644,7 +673,8 @@ Example:
     export const elapsed = derived(
         time,
         $time => Math.round(($time - start) / 1000)
-    );```  
+    );
+    ```  
 
 Store Bindings allow you to bind: to values stored in a store.  
 
@@ -658,7 +688,8 @@ In _store.js_:
     export const greeting = derived(
         name,
         $name => `Hello ${$name}!`
-    );```  
+    );
+    ```  
 
 In _App.svelte_:  
 
@@ -672,7 +703,8 @@ In _App.svelte_:
      
     <button on:click="{() => $name += '!'}">
         Add exclamation mark!
-    </button>```  
+    </button>
+    ```  
 
 ## Section 12: Animations & Transitions  
 
@@ -696,7 +728,8 @@ const progress = tweened(0 {
         duration: 700,
         easing: cubicIn,
         interpolator: 
-    })```  
+    })
+    ```  
 
 _easing_ module contains a bunch of [functions](https://svelte.dev/docs#svelte_easing)  
 
@@ -711,7 +744,8 @@ const cardPos = spring([{cardobjects1}, {cardobject2}],{
                     stiffness: 0.05,
     				damping: 0.9,
     				precision: 0.001
-})```  
+})
+```  
 
 ### Transitions  
 
@@ -745,7 +779,8 @@ code
     {each boxes as box}
         <div transition:fly={{easing: cubicIn, x: 0, y: 300}} on:click={discard.bind(this, box)}>{box}</div>
     {/each}
-{/if}```  
+{/if}
+```  
 
 ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Ftomsbee%2Fqtvc26SxBD.gif?alt=media&token=798ab147-1c74-4600-8992-881824de9870)  
 
